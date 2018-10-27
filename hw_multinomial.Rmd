@@ -53,9 +53,6 @@ nes_data_comp$ideology <- scale(nes_data_comp$ideo_feel,center=TRUE)
 # m1 = vglm(partyid7~ideo+age+race+gender,data=nes_data_comp,Hess=TRUE,family=multinomial)
 # summary(m1)
 
-# require(arm)
-# require(foreign)
-# require(MASS)
 m1 = polr(partyid7~ideo+age+race+gender,data=nes_data_comp,Hess=TRUE)
 summary(m1)
 
@@ -66,6 +63,16 @@ summary(m1)
 confint(m1)
 ```
 
+The fitted model is:
+Logit P($\hat{y}$ > j) = (-0.38 female - 0.013 age_10 - 1.73 black + 0.15 asian - 0.102 native - 0.58 hispanic + 1.003 moderate + 1.98 consevative - $C_{j}$)
+
+age: holding other factors constant, comparing groups with one unit difference in age (10 year difference), we expect the older group to be on average 0.013 lower in log odds of being republican.
+
+female: holding other factors constant, comparing females with males, we expect that females is on average 0.38 lower in log odds of being republican.
+
+race: holding other factors constant, we expect Asian to be higher in log odds of being republican than whites, while other race groups to be lower in log odds of being republican than whites.
+
+ideo: holding other factors constant, comparing with liberal people, moderate people are expected to be 1.003 higher in log odds of being republican and conservative people are expected to be 1.98 higher in log odds of being republican on average.
 
 3. Use a binned residual plot to assess the fit of the model.
 ```{r}
